@@ -26,11 +26,6 @@ class User < ActiveRecord::Base
 
   attr_accessor :login
   validates :username, presence: true, uniqueness: true, format: { with: /\A[a-zA-Z]+\z/, message: "only allows letters" }
-  validates_confirmation_of :password, if: :revalid
-
-  def revalid
-    false
-  end
 
   def login=(login)
     @login = login
