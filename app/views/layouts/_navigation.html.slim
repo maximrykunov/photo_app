@@ -8,6 +8,9 @@ nav.navbar.navbar-inverse.navbar-fixed-top
         span.icon-bar
         span.icon-bar
       = link_to 'Home', root_path, class: 'navbar-brand'
+      = link_to 'Photos', photos_path, class: 'navbar-brand'
+      - if user_signed_in?
+        = link_to "Sign out, #{current_user.login}", destroy_user_session_path, method: :delete, class: 'navbar-brand'
     .collapse.navbar-collapse
       ul.nav.navbar-nav
         == render 'layouts/navigation_links'

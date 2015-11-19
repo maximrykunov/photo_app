@@ -1,0 +1,13 @@
+= simple_form_for(@photo, html: {multipart: true}) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    - if @photo.image?
+      p
+        b Preview:
+        = image_tag @photo.image_url(:thumb) if @photo.image?
+    = f.file_field :image, :label => "Upload an image"
+
+  .form-actions
+    = f.button :submit

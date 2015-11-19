@@ -1,0 +1,30 @@
+.container
+  .row
+    .col-lg-12
+      h1.page-header
+        | Photo site
+  - unless user_signed_in?
+    .row
+      .col-lg-12
+        = simple_form_for(:user, url: session_path(:user)) do |f|
+          .form-inputs
+            = f.input :username, required: false, autofocus: true
+            = f.input :password, required: false
+          .form-actions
+            = f.button :submit, "Log in"
+
+  .row
+    .col-lg-12
+      h3.page-header
+        | Latest Photo
+    - @latest_photos.each do |photo|
+      .col-sm-3.col-xs-6
+        = link_to photo
+          = image_tag photo.image_url, class: "img-responsive portfolio-item"
+          = photo.name
+  hr
+  footer
+    .row
+      .col-lg-12
+        p
+          | Copyright © Your Website 2015

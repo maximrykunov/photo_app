@@ -1,0 +1,24 @@
+h1 Listing photos
+
+table.table.table-bordered.table-hover
+  thead
+    tr
+      th.col-md-6 Name
+      th.col-md-3 Preview
+      - if user_signed_in?
+        th.col-md-1
+
+  tbody
+    - @photos.each do |photo|
+      tr
+        td = link_to photo.name, photo
+        td = image_tag photo.image_url(:thumb) if photo.image?
+        - if user_signed_in?
+          td
+            - if can? :destroy, photo
+             = link_to 'Destroy', photo, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+- if user_signed_in?
+  = link_to 'New Photo', new_photo_path

@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  b Name:
+  = @photo.name
+
+p
+  b Preview:
+  = image_tag @photo.image_url(:thumb) if @photo.image?
+
+p
+  b Image:
+  = image_tag @photo.image_url if @photo.image?
+
+- if can? :destroy, @photo
+  = link_to 'Destroy', @photo, data: {:confirm => 'Are you sure?'}, :method => :delete
+  '|
+= link_to 'Back', photos_path
